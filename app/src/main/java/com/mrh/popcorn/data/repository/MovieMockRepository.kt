@@ -11,14 +11,18 @@ class MovieMockRepository {
 
     fun getPopularMovies(): List<Movie> {
         val movies = mutableListOf(
-            Movie(1, "Inception", "/poster_inception.jpg", 8.8),
+            Movie(1, "Inception", "/poster_inception.jpg", 8.8, true),
             Movie(2, "Interstellar", "/poster_interstellar.jpg", 8.6),
-            Movie(title = "Matrix", id = 3, posterUrl = "/poster_matrix.jpg", rating = 8.0)
+            Movie(title = "Matrix", id = 3, posterUrl = "/poster_matrix.jpg", rating = 8.0),
+            Movie(4, "Dune: Part Two", "/poster_dune2.jpg", 8.9),
+            Movie(4, "Dune: Part Two", "/poster_dune2.jpg", 8.9),
+            Movie(4, "Dune: Part Two", "/poster_dune2.jpg", 8.9)
         )
 
         movies.apply {
             add(
                 Movie(4, "Dune: Part Two", "/poster_dune2.jpg", 8.9)
+
             )
         }
 
