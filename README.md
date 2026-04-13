@@ -1,4 +1,4 @@
-# 🍿 PopCorn
+# 🍿 PopCorn - Proyecto Recuperación
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/marioProfeJOYFE/PopCorn)
 
