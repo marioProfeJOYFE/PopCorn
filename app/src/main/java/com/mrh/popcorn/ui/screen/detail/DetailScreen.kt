@@ -126,7 +126,11 @@ fun MovieDetailCard(movieDetail: MovieDetail, onBack: () -> Unit = {}) {
     )
     LaunchedEffect(Unit) { visible = true }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
