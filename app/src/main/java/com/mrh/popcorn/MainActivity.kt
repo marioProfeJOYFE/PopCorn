@@ -32,18 +32,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mrh.popcorn.data.model.Movie
-import com.mrh.popcorn.data.repository.MovieMockRepository
+import com.mrh.popcorn.data.viewmodel.HomeViewModel
 import com.mrh.popcorn.ui.theme.PopCornTheme
+import androidx.compose.runtime.collectAsState
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -72,27 +71,27 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier){
+fun HomeScreen(modifier: Modifier = Modifier, viewModel: HomeViewModel = viewModel()){
 
-    val movieMockRepository = MovieMockRepository()
 
-    val peliculas = movieMockRepository.getPopularMovies()
+    val peliculas by viewModel.popularMovies.collectAsState()
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(200.dp),
         modifier = modifier
     ) {
         items(peliculas){ pelicula ->
-            GridMovieCard(pelicula)
+            GridMovieCard(
+                movie = pelicula,
+                onFavouriteClick = { viewModel.toggleFavourite(pelicula.id) }
+            )
         }
     }
 
 }
 
 @Composable
-fun MovieCard(movie: Movie){
-
-    var esPeliFavorita by remember { mutableStateOf(movie.isFavourite) }
+fun MovieCard(movie: Movie, onFavouriteClick: () -> Unit){
 
     Card(
         modifier = Modifier.fillMaxWidth().padding(10.dp)
@@ -121,14 +120,12 @@ fun MovieCard(movie: Movie){
                 Text("Rating: ${movie.rating} / 5,0")
             }
             IconButton(
-                onClick = {
-                    esPeliFavorita = !esPeliFavorita
-                }
+                onClick = onFavouriteClick
             ) {
                 Icon(
                     imageVector = Icons.Filled.Favorite,
                     contentDescription = null,
-                    tint = if(esPeliFavorita) Color.Red else MaterialTheme.colorScheme.primary
+                    tint = if(movie.isFavourite) Color.Red else MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -138,9 +135,7 @@ fun MovieCard(movie: Movie){
 
 
 @Composable
-fun GridMovieCard(movie: Movie){
-
-    var esPeliFavorita by remember { mutableStateOf(movie.isFavourite) }
+fun GridMovieCard(movie: Movie, onFavouriteClick: () -> Unit){
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -168,14 +163,12 @@ fun GridMovieCard(movie: Movie){
                 Text("Rating: ${movie.rating} / 5,0")
             }
             IconButton(
-                onClick = {
-                    esPeliFavorita = !esPeliFavorita
-                }
+                onClick = onFavouriteClick
             ) {
                 Icon(
                     imageVector = Icons.Filled.Favorite,
                     contentDescription = null,
-                    tint = if(esPeliFavorita) Color.Red else MaterialTheme.colorScheme.primary
+                    tint = if(movie.isFavourite) Color.Red else MaterialTheme.colorScheme.primary
                 )
             }
         }
