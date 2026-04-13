@@ -35,3 +35,25 @@ Dado que el proyecto está en desarrollo, puedes clonarlo y ejecutarlo localment
 1. **Clona el repositorio:**
    ```bash
    git clone [https://github.com/marioProfeJOYFE/PopCorn.git](https://github.com/marioProfeJOYFE/PopCorn.git)
+   ```
+2. **Abre el proyecto:**
+   Abre Android Studio y selecciona `File > Open`, luego navega hasta la carpeta del proyecto clonado.
+3. **Sincroniza Gradle:**
+   Espera a que Gradle descargue las dependencias y configure el entorno.
+4. **Ejecuta la app:**
+   Conecta un dispositivo físico o inicia un emulador y pulsa el botón **Run** (▶️).
+
+---
+
+## 📂 Estructura inicial del código
+
+* `data/model/`: Contiene los modelos de datos como `Movie`.
+* `data/repository/`: Manejo de datos. Actualmente utiliza un `MovieMockRepository` con datos estáticos (hardcodeados) para el diseño inicial.
+* `ui/theme/`: Configuración del diseño base (colores, tipografía y tema de Material 3).
+* `MainActivity.kt`: Punto de entrada de la app y contenedores de los Composable principales.
+
+---
+
+## 👨‍💻 Autor
+
+Desarrollado por **Mario Rios Holgado**.
