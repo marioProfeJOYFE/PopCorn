@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Caja de palomitas -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,45 L40,38 L68,38 L74,45 L70,78 L38,78 Z" />
+
+    <!-- Rayas rojas de la caja -->
+    <path
+        android:fillColor="#E50914"
+        android:pathData="M42,38 L46,38 L44,78 L40,78 Z" />
+    <path
+        android:fillColor="#E50914"
+        android:pathData="M50,38 L54,38 L52,78 L48,78 Z" />
+    <path
+        android:fillColor="#E50914"
+        android:pathData="M58,38 L62,38 L60,78 L56,78 Z" />
+    <path
+        android:fillColor="#E50914"
+        android:pathData="M66,38 L68,38 L68,78 L64,78 Z" />
+
+    <!-- Palomitas (circulos blancos arriba) -->
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M46,38 A8,8 0,0,1 54,30 A7,7 0,0,1 62,38" />
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M40,40 A7,7 0,0,1 48,33 A6,6 0,0,1 54,40" />
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M54,40 A7,7 0,0,1 62,33 A6,6 0,0,1 68,40" />
+    <path
+        android:fillColor="#FFECB3"
+        android:pathData="M43,42 A6,6 0,0,1 51,36" />
+    <path
+        android:fillColor="#FFECB3"
+        android:pathData="M57,42 A6,6 0,0,1 65,36" />
+</vector>
