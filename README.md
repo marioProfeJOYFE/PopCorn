@@ -1,4 +1,4 @@
-# 🍿 PopCorn - Diseño Final & API Integration
+# 🍿 PopCorn - Diseño Final & Integración API
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/marioProfeJOYFE/PopCorn)
 
