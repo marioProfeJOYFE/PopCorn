@@ -23,8 +23,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.mrh.popcorn.HomeScreen
 import com.mrh.popcorn.data.viewmodel.HomeViewModel
+import com.mrh.popcorn.ui.screen.HomeScreen
 import com.mrh.popcorn.ui.screen.MovieDetailScreen
 import kotlinx.serialization.Serializable
 
