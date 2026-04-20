@@ -4,6 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.rememberTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,13 +24,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +41,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,124 +66,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun HomeScreen(
-    modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(),
-    onMovieClick: (Movie) -> Unit
-) {
-
-
-    val peliculas by viewModel.popularMovies.collectAsState()
-
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(200.dp),
-        modifier = modifier
-    ) {
-        items(peliculas) { pelicula ->
-            GridMovieCard(
-                movie = pelicula,
-                onFavouriteClick = { viewModel.toggleFavourite(pelicula.id) },
-                onMovieClick = { onMovieClick(pelicula) }
-            )
-        }
-    }
-
-}
-
-@Composable
-fun MovieCard(movie: Movie, onFavouriteClick: () -> Unit) {
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Card(
-                modifier = Modifier
-                    .width(150.dp)
-                    .height(100.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                )
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("🎬", fontSize = 50.sp, textAlign = TextAlign.Center)
-                }
-            }
-            Column {
-                Text(movie.title)
-                Text("Rating: ${movie.rating} / 5,0")
-            }
-            IconButton(
-                onClick = onFavouriteClick
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Favorite,
-                    contentDescription = null,
-                    tint = if (movie.isFavourite) Color.Red else MaterialTheme.colorScheme.primary
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun GridMovieCard(movie: Movie, onFavouriteClick: () -> Unit, onMovieClick: () -> Unit) {
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        onClick = onMovieClick
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                )
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("🎬", fontSize = 50.sp, textAlign = TextAlign.Center)
-                }
-            }
-            Column {
-                Text(movie.title)
-                Text("Rating: ${movie.rating} / 5,0")
-            }
-            IconButton(
-                onClick = onFavouriteClick
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Favorite,
-                    contentDescription = null,
-                    tint = if (movie.isFavourite) Color.Red else MaterialTheme.colorScheme.primary
-                )
-            }
-        }
-    }
-
-}
-
-
-

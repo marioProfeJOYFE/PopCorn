@@ -2,6 +2,7 @@ package com.mrh.popcorn.data.repository
 
 import android.util.Log
 import com.mrh.popcorn.data.model.Movie
+import kotlinx.coroutines.delay
 
 /**
  *  Clase MovieMockRepository
@@ -9,7 +10,7 @@ import com.mrh.popcorn.data.model.Movie
  */
 class MovieMockRepository {
 
-    fun getPopularMovies(): List<Movie> {
+    suspend fun getPopularMovies(): List<Movie> {
         val movies = mutableListOf(
             Movie(1, "Inception", "/poster_inception.jpg", 8.8, true),
             Movie(2, "Interstellar", "/poster_interstellar.jpg", 8.6),
@@ -26,24 +27,10 @@ class MovieMockRepository {
             )
         }
 
+        delay(3000)
+
         return movies
     }
-
-    fun processSelectedMovie(movieId: Int?){
-        movieId.let {
-            val allMovies = getPopularMovies()
-
-            val selectedMovie = allMovies.find { movie ->
-                movie.id == movieId
-            }
-
-            Log.d("ResultadoPelicula", selectedMovie?.title ?: "")
-        } ?: run {
-            Log.e("ResultadoPelicula", "El ID seleccionado es nulo")
-        }
-    }
-
-
 }
 
 
