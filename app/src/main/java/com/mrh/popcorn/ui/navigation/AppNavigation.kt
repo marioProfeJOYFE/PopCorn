@@ -45,7 +45,12 @@ fun AppNavigation() {
 
     // Lista con las rutas disponibles en el NavigationBar
     val routes = listOf(
-        NavRoute(label = "Inicio", icon = Icons.Filled.Home, routeObject = HomeScreenDestination)
+        NavRoute(
+            label = "Inicio",
+            icon = Icons.Filled.Home,
+            routeClass = HomeScreenDestination::class,
+            navigate = { navController.navigate(HomeScreenDestination) }
+        )
     )
 
     val homeViewModel: HomeViewModel = viewModel()
@@ -55,10 +60,8 @@ fun AppNavigation() {
             NavigationBar {
                 routes.forEach { route ->
                     NavigationBarItem(
-                        onClick = {
-                            navController.navigate(route.routeObject)
-                        },
-                        selected = currentDestination?.hasRoute(route.routeObject::class) == true,
+                        onClick = { route.navigate() },
+                        selected = currentDestination?.hasRoute(route.routeClass) == true,
                         icon = {
                             Icon(imageVector = route.icon, contentDescription = null)
                         },

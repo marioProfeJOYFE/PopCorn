@@ -1,9 +1,11 @@
 package com.mrh.popcorn.data.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrh.popcorn.data.model.Movie
 import com.mrh.popcorn.data.repository.MovieMockRepository
+import com.mrh.popcorn.data.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,10 +21,11 @@ class HomeViewModel : ViewModel() {
     val isLoading = _isLoading.asStateFlow()
 
     init {
-        val movieMockRepository = MovieMockRepository()
+        val movieRepository = MovieRepository()
         viewModelScope.launch(Dispatchers.IO){
             _isLoading.value = true
-            _popularMovies.value = movieMockRepository.getPopularMovies()
+            _popularMovies.value = movieRepository.getPopularMovies()
+            Log.d("HomeViewModel", "Peliculas: ${_popularMovies.value}")
             _isLoading.value = false
         }
     }
