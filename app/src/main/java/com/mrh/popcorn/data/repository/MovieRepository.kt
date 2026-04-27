@@ -9,6 +9,8 @@ class MovieRepository {
 
     private val apiKey = "c95b8cf52728e540d04d74700f011aca"
 
+    private val posterURL = "https://image.tmdb.org/t/p/w500"
+
     suspend fun getPopularMovies(): List<Movie> {
         return withContext(Dispatchers.IO){
             try {
@@ -20,7 +22,7 @@ class MovieRepository {
                     Movie(
                         id = networkObj.id,
                         title = networkObj.title,
-                        posterUrl = networkObj.posterPath ?: "",
+                        posterUrl = posterURL + networkObj.posterPath,
                         rating = networkObj.rating
                     )
                 }

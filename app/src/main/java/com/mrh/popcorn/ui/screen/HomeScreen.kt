@@ -33,13 +33,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import com.mrh.popcorn.data.model.Movie
 import com.mrh.popcorn.data.viewmodel.HomeViewModel
 
@@ -139,21 +142,19 @@ fun GridMovieCard(movie: Movie, onFavouriteClick: () -> Unit, onMovieClick: () -
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Card(
+            AsyncImage(
+                // Le pasamos la URL de internet que hemos construido en el Repositorio
+                model = movie.posterUrl,
+                // Accesibilidad para lectores de pantalla
+                contentDescription = "Póster de la película ${movie.title}",
+                // Modifier para darle tamaño y recortar las esquinas superiores
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                )
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("🎬", fontSize = 50.sp, textAlign = TextAlign.Center)
-                }
-            }
+                    .height(200.dp)
+                    .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
+                // ContentScale.Crop hace que la imagen llene el espacio sin deformarse (como centerCrop en XML)
+                contentScale = ContentScale.Crop
+            )
             Column {
                 Text(movie.title)
                 Text("Rating: ${movie.rating} / 5,0")
