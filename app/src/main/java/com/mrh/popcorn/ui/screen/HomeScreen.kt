@@ -136,6 +136,7 @@ fun GridMovieCard(movie: Movie, onFavouriteClick: () -> Unit, onMovieClick: () -
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .height(350.dp)
             .padding(8.dp),
         onClick = onMovieClick
     ) {

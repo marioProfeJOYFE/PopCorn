@@ -11,5 +11,11 @@ interface TmdbApi {
         @Query("language") language: String = "es-ES"
     ) : MovieResponse
 
+    @GET("tv/popular")
+    suspend fun getPopularTvShows(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "es-ES"
+    ) : MovieResponse
+
 
 }
